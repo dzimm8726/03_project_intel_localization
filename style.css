@@ -8,7 +8,7 @@
   --intel-light: #00c7fd;
   --intel-accent: #6cc48a;
   --text-dark: #1b1b1b;
-  --text-muted: #5a6573;
+  --text-muted: #4a5563;   /* darkened for WCAG AA contrast on white */
   --card-bg: #ffffff;
   --page-bg: #f4f7fb;
 }
@@ -54,13 +54,15 @@ header h1 {
 
 header p {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   max-width: 620px;
   margin: 0 auto;
 }
 
 /* ----------------------- Timeline ------------------------- */
-section {
+/* NOTE: every timeline rule is scoped to #timeline so the new
+   Bootstrap sections below are NOT affected by these flex styles. */
+#timeline {
   display: flex;
   flex-direction: row;
   gap: 1.75rem;
@@ -72,19 +74,19 @@ section {
   scrollbar-color: var(--intel-blue) transparent;
 }
 
-section::-webkit-scrollbar {
+#timeline::-webkit-scrollbar {
   height: 10px;
 }
-section::-webkit-scrollbar-thumb {
+#timeline::-webkit-scrollbar-thumb {
   background: var(--intel-blue);
   border-radius: 10px;
 }
-section::-webkit-scrollbar-track {
+#timeline::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.06);
 }
 
 /* ----------------------- Cards ---------------------------- */
-section > div {
+#timeline > div {
   flex: 0 0 300px;
   background: var(--card-bg);
   border-radius: 16px;
@@ -97,25 +99,25 @@ section > div {
   transition: transform 0.35s ease, box-shadow 0.35s ease;  /* LevelUp: transitions */
 }
 
-section > div:hover {
+#timeline > div:hover {
   transform: translateY(-10px) scale(1.02);                 /* LevelUp: transforms */
   box-shadow: 0 18px 40px rgba(0, 55, 124, 0.22);
 }
 
-section > div h2 {
+#timeline > div h2 {
   font-size: 2rem;
   color: var(--intel-blue);
   padding: 1.25rem 1.5rem 0;
 }
 
-section > div h3 {
+#timeline > div h3 {
   font-size: 1.15rem;
   color: var(--text-dark);
   padding: 0.25rem 1.5rem 1rem;
   font-weight: 600;
 }
 
-section > div img {
+#timeline > div img {
   width: 100%;
   height: 165px;
   object-fit: cover;
@@ -123,7 +125,7 @@ section > div img {
 }
 
 /* Hover reveal: the description is collapsed until hover */
-section > div p {
+#timeline > div p {
   font-size: 0.92rem;
   color: var(--text-muted);
   padding: 0 1.5rem;
@@ -133,7 +135,7 @@ section > div p {
   transition: max-height 0.45s ease, opacity 0.35s ease, padding 0.45s ease;
 }
 
-section > div:hover p {
+#timeline > div:hover p {
   max-height: 320px;
   opacity: 1;
   padding: 1rem 1.5rem 1.5rem;
@@ -151,7 +153,7 @@ section > div:hover p {
 /* ----------------------- Responsive ------------------------ */
 /* On smaller screens the timeline stacks vertically */
 @media (max-width: 768px) {
-  section {
+  #timeline {
     flex-direction: column;
     align-items: center;
     overflow-x: visible;
@@ -159,14 +161,14 @@ section > div:hover p {
     padding: 2rem 1.25rem;
   }
 
-  section > div {
+  #timeline > div {
     flex: 1 1 auto;
     width: 100%;
     max-width: 420px;
   }
 
   /* On touch / small screens, reveal text by default since there is no hover */
-  section > div p {
+  #timeline > div p {
     max-height: 320px;
     opacity: 1;
     padding: 1rem 1.5rem 1.5rem;
@@ -175,4 +177,106 @@ section > div:hover p {
   header {
     padding: 3rem 1.25rem 3.5rem;
   }
+}
+/* ===========================================================
+   NEW SECTIONS (Project 3) — styles for Bootstrap content
+   =========================================================== */
+
+/* Section titles/subtitles */
+.section-title {
+  color: var(--intel-dark);
+}
+.section-subtitle {
+  color: var(--text-muted);
+}
+
+/* ----------------------- Focus cards ----------------------- */
+.focus-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border-top: 5px solid var(--intel-blue);
+  box-shadow: 0 6px 18px rgba(0, 55, 124, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.focus-card:hover,
+.focus-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 55, 124, 0.18);
+}
+.focus-icon {
+  font-size: 2.5rem;
+  color: var(--intel-blue);
+}
+.focus-card p {
+  color: var(--text-muted);
+}
+
+/* "Learn More" links */
+.learn-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--intel-blue);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.learn-more:hover,
+.learn-more:focus {
+  color: var(--intel-dark);
+  text-decoration: underline;
+}
+.learn-more i {
+  transition: transform 0.2s ease;
+}
+.learn-more:hover i {
+  transform: translateX(4px);
+}
+/* In RTL, the arrow should point and move the other way */
+[dir="rtl"] .learn-more i {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .learn-more:hover i {
+  transform: scaleX(-1) translateX(4px);
+}
+
+/* ----------------------- Accordion ------------------------- */
+.accordion-button:not(.collapsed) {
+  background-color: var(--intel-blue);
+  color: #ffffff;
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 113, 197, 0.4);
+}
+
+/* ----------------------- Newsletter ------------------------ */
+/* Darker gradient than the hero so white text passes contrast checks */
+.newsletter-section {
+  background: linear-gradient(135deg, #002a5e 0%, var(--intel-dark) 70%);
+}
+.btn-subscribe {
+  background-color: var(--intel-light);
+  color: #00264d;          /* dark text on light-blue button = high contrast */
+  font-weight: 700;
+  border: none;
+}
+.btn-subscribe:hover,
+.btn-subscribe:focus {
+  background-color: #ffffff;
+  color: #00264d;
+}
+
+/* ----------------------- Footer ---------------------------- */
+.site-footer {
+  background-color: #001a3d;   /* very dark navy for strong contrast */
+  color: #e6ecf5;
+}
+.site-footer .footer-link {
+  color: #cfe2f7;
+  text-decoration: none;
+  margin: 0 0.75rem;
+}
+.site-footer .footer-link:hover,
+.site-footer .footer-link:focus {
+  color: #ffffff;
+  text-decoration: underline;
 }
