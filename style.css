@@ -1,0 +1,178 @@
+/* ===========================================================
+   Intel: Sustainability Through the Ages
+   =========================================================== */
+
+:root {
+  --intel-dark: #00377c;
+  --intel-blue: #0071c5;
+  --intel-light: #00c7fd;
+  --intel-accent: #6cc48a;
+  --text-dark: #1b1b1b;
+  --text-muted: #5a6573;
+  --card-bg: #ffffff;
+  --page-bg: #f4f7fb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ----------------------- Hero Section ---------------------- */
+header {
+  background: linear-gradient(135deg, var(--intel-dark) 0%, var(--intel-blue) 60%, var(--intel-light) 140%);
+  color: #ffffff;
+  padding: 4rem 1.5rem 4.5rem;
+  text-align: center;
+}
+
+header > div {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+header .logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1.75rem;
+}
+
+header h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+header p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ----------------------- Timeline ------------------------- */
+section {
+  display: flex;
+  flex-direction: row;
+  gap: 1.75rem;
+  padding: 3rem 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;       /* LevelUp: scroll snap */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--intel-blue) transparent;
+}
+
+section::-webkit-scrollbar {
+  height: 10px;
+}
+section::-webkit-scrollbar-thumb {
+  background: var(--intel-blue);
+  border-radius: 10px;
+}
+section::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ----------------------- Cards ---------------------------- */
+section > div {
+  flex: 0 0 300px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border-top: 5px solid var(--intel-blue);
+  box-shadow: 0 6px 18px rgba(0, 55, 124, 0.08);
+  overflow: hidden;
+  scroll-snap-align: center;           /* LevelUp: scroll snap */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;  /* LevelUp: transitions */
+}
+
+section > div:hover {
+  transform: translateY(-10px) scale(1.02);                 /* LevelUp: transforms */
+  box-shadow: 0 18px 40px rgba(0, 55, 124, 0.22);
+}
+
+section > div h2 {
+  font-size: 2rem;
+  color: var(--intel-blue);
+  padding: 1.25rem 1.5rem 0;
+}
+
+section > div h3 {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  padding: 0.25rem 1.5rem 1rem;
+  font-weight: 600;
+}
+
+section > div img {
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover reveal: the description is collapsed until hover */
+section > div p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  padding: 0 1.5rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.35s ease, padding 0.45s ease;
+}
+
+section > div:hover p {
+  max-height: 320px;
+  opacity: 1;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+/* ----------------------- Scroll hint ----------------------- */
+.scroll-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 0 1.5rem 3rem;
+}
+
+/* ----------------------- Responsive ------------------------ */
+/* On smaller screens the timeline stacks vertically */
+@media (max-width: 768px) {
+  section {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding: 2rem 1.25rem;
+  }
+
+  section > div {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* On touch / small screens, reveal text by default since there is no hover */
+  section > div p {
+    max-height: 320px;
+    opacity: 1;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  header {
+    padding: 3rem 1.25rem 3.5rem;
+  }
+}
