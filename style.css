@@ -280,3 +280,22 @@ header p {
   color: #ffffff;
   text-decoration: underline;
 }
+
+/* ----------------- Google Translate control ---------------- */
+.gtranslate-control {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1050;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+/* In RTL, move the control to the left side instead */
+[dir="rtl"] .gtranslate-control {
+  right: auto;
+  left: 10px;
+}
+/* Google injects a top banner when translating; nudge content down a touch */
+body { top: 0 !important; }
