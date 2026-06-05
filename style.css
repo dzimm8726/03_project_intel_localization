@@ -297,5 +297,3 @@ header p {
   right: auto;
   left: 10px;
 }
-/* Google injects a top banner when translating; nudge content down a touch */
-body { top: 0 !important; }
